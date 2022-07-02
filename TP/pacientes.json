@@ -1,0 +1,60 @@
+[
+  {
+    "historialClinico": [],
+    "tratamientoActual": {
+      "enfermedad": {
+        "nombre": "Estres"
+      },
+      "duracion": 420,
+      "inicioDate": {
+        "year": 2022,
+        "month": 6,
+        "day": 21
+      },
+      "finDate": {
+        "year": 2023,
+        "month": 8,
+        "day": 15
+      },
+      "listaAcciones": [
+        {
+          "type": "AccionBooleana",
+          "properties": {
+            "ultimaNoti": {
+              "year": 2022,
+              "month": 6,
+              "day": 21
+            },
+            "textoPregunta": "Tomar Pastilla",
+            "cadaCuanto": 1,
+            "nombre": "Pastilla"
+          }
+        }
+      ],
+      "listaRegistrosDiarios": [
+        {
+          "fecha": {
+            "year": 2022,
+            "month": 6,
+            "day": 21
+          },
+          "listaRegistros": [
+            {
+              "nombreAccion": "Pastilla",
+              "seHizo": true
+            }
+          ]
+        }
+      ],
+      "finalizado": false
+    },
+    "idMedicoAsignado": 1607600055,
+    "debeSerAtendido": false,
+    "nombre": "paciente",
+    "apellido": "general",
+    "dni": "87654321",
+    "mail": "paciente@outlook.com",
+    "password": "123",
+    "id": -2010901514
+  }
+]

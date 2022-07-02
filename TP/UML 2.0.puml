@@ -1,0 +1,244 @@
+@startuml
+class UsuarioInexistenteException {
+}
+class EliminarRegistroException {
+}
+class Medico {
+- ArrayList<Integer> pacientesDelMedico
++ StringBuilder notificarMedico()
++ ArrayList<Integer> obtenerIDsPacientes()
++ void agregarPaciente(Integer)
++ void diagnosticarPacientes()
++ void verHistorialPaciente()
++ void verHistorialTratamientoActual()
++ Tratamiento crearTratamiento()
++ Tratamiento editarTratamiento(Tratamiento)
++ String toString()
+}
+class Paciente {
+- ArrayList<Tratamiento> historialClinico
+# Tratamiento tratamientoActual
+- Integer idMedicoAsignado
+- Boolean debeSerAtendido
++ void setTratamientoActual(Tratamiento)
++ void setDebeSerAtendido(Boolean)
++ String getinfoPaciente()
++ Integer getId()
++ Integer getIdMedicoAsignado()
++ Tratamiento getTratamientoActual()
++ void setHistorialClinico(ArrayList<Tratamiento>)
++ void setIdMedicoAsignado(Integer)
++ Boolean getDebeSerAtendido()
++ ArrayList<Tratamiento> getHistorialClinico()
++ void notificarPaciente()
++ void realizarAcciones()
++ void editarAccionesDelDia()
++ String toString()
+}
+class Main {
++ {static} void main(String[])
+}
+interface Tratamientos {
+~ Tratamiento crearTratamiento()
+~ Tratamiento editarTratamiento(Tratamiento)
+}
+class RegistroDiario {
+- LocalDate fecha
+# ArrayList<Registro> listaRegistros
++ void setFecha(LocalDate)
++ ArrayList<Registro> getListaRegistros()
++ void setListaRegistros(ArrayList<Registro>)
++ LocalDate getFecha()
++ void agregarRegistro(Registro)
++ void modificarRegistro()
++ String mostrarRegistrosParaToString()
++ String toString()
+}
+class AccionBooleana {
++ void mostrarAccionBooleana()
++ AccionBooleana clonarAccion()
++ Registro accionar()
++ String toString()
+}
+abstract class Persistencia {
++ {static} ArrayList<T> deserializacion(String,Class<T>)
++ {static} void serializacion(ArrayList<T>,String)
++ {static} ArrayList<Paciente> deserializacionPacientes()
++ {static} void serializacionPacientes(ArrayList<Paciente>)
++ {static} ArrayList<Accion> deserializacionAcciones()
++ {static} void serializacionAcciones(ArrayList<Accion>)
++ {static} ArrayList<Tratamiento> deserializacionTratamientos()
++ {static} void serializacionTratamientos(ArrayList<Tratamiento>)
+}
+class Usuario {
+- String nombre
+- String apellido
+- String dni
+- String mail
+- String password
+- Integer id
++ String getMail()
++ String getPassword()
++ Integer getId()
++ String getDni()
++ String getNombre()
++ String getApellido()
++ boolean equals(Object)
++ int hashCode()
++ String toStringInfoNoSensible()
++ String toString()
+}
+class AccionDouble {
++ void mostrarAccionDouble()
++ AccionDouble clonarAccion()
++ Registro accionar()
++ String toString()
+}
+class Admin {
++ void registrarPaciente()
++ void registrarMedico()
+- Usuario buscarUsuario(ArrayList<Usuario>,String)
+- String validarMail(ArrayList<Usuario>,String)
++ String validarDni(String)
+- Integer asignarMedico(String,String)
++ void agregarEnfermedad()
++ Tratamiento crearTratamiento()
++ Tratamiento editarTratamiento(Tratamiento)
++ void crearAccion()
++ boolean verificarAccionRepetida(ArrayList<Accion>,String)
++ String nombreRepetidoEnfermedad(String)
++ void mostrarEnfermedadesArchivo()
++ String toString()
+}
+class Enfermedad {
+- String nombre
++ String getNombre()
++ void setNombre(String)
++ String mostrarEnfermedad()
++ String toString()
+}
+class Sistema {
+~ Scanner scan
+- ArrayList<Usuario> usuarios
+- {static} LocalDate fechaDelDia
+- Usuario usuarioLogueado
++ {static} LocalDate getFechaDelDia()
++ {static} void agregarDias(long)
++ void menu()
++ void menuPaciente()
++ void menuMedico()
++ void menuAdmin()
++ Usuario login()
++ void persistirPacienteActual(Paciente)
++ Usuario validarCredenciales(String,String)
++ void logout()
++ {static} boolean comprobarCorrespodenAccion(LocalDate,int)
++ {static} boolean comprobarCorrespodiaAccionPasado(LocalDate,LocalDate,int)
+}
+class AccionFallidaException {
+}
+abstract class Accion {
+# LocalDate ultimaNoti
+# String textoPregunta
+# Integer cadaCuanto
+# String nombre
++ LocalDate getUltimaNoti()
++ String getTextoPregunta()
++ void setTextoPregunta(String)
++ Integer getCadaCuanto()
++ void setUltimaNoti(LocalDate)
++ void setCadaCuanto(Integer)
++ void setNombre(String)
++ {abstract}Accion clonarAccion()
++ {abstract}Registro accionar()
++ String getNombre()
++ String mostrarAccion()
++ String toString()
+}
+class CredencialesIncorrectasException {
+}
+class DniIncorrectoException {
+}
+class Colores {
++ {static} String verde()
++ {static} String amarillo()
++ {static} String rojo()
++ {static} String blanco()
++ {static} String violeta()
+}
+class AbstractAccionAdapter {
++ JsonElement serialize(Accion,Type,JsonSerializationContext)
++ Accion deserialize(JsonElement,Type,JsonDeserializationContext)
+}
+class DniInexistenteException {
+}
+class MailRepetidoException {
+}
+class Registro {
+- String nombreAccion
+- String rta
+- Boolean seHizo
++ String getNombreAccion()
++ void setNombreAccion(String)
++ String getRta()
++ void setRta(String)
++ Boolean getSeHizo()
++ void setSeHizo(Boolean)
++ String mostrarNombresRegistros()
++ void modificar()
++ String toStringParaHistorial()
++ String toString()
+}
+class Tratamiento {
+- Enfermedad enfermedad
+- Integer duracion
+- LocalDate inicioDate
+- LocalDate finDate
+# ArrayList<Accion> listaAcciones
+# Stack<RegistroDiario> listaRegistrosDiarios
+- boolean finalizado
++ void setInicioDate(LocalDate)
++ void setListaAcciones(ArrayList<Accion>)
++ Stack<RegistroDiario> getListaRegistrosDiarios()
++ void setListaRegistrosDiarios(Stack<RegistroDiario>)
++ boolean isFinalizado()
++ void mostrarTratamiento()
++ Tratamiento clonarTratamiento()
++ LocalDate getInicioDate()
++ LocalDate getFinDate()
++ void setEnfermedad(Enfermedad)
++ void setDuracion(Integer)
++ void setIncioDate(LocalDate)
++ void setFinDate(LocalDate)
++ ArrayList<Accion> getListaAcciones()
++ void setFinalizado(boolean)
++ int getDuracion()
++ boolean existeRegistroDiario(LocalDate)
++ void realizarAcciones()
++ void modificarAcciones()
++ Enfermedad getEnfermedad()
++ String mostrarTratamientoString()
++ String toStringHistorialTratamientoActual()
++ String toString()
++ int getNumeroAccionesNotificables()
++ int getNumeroAccionesRegistroDiario(LocalDate)
+}
+
+
+Exception <|-- UsuarioInexistenteException
+Exception <|-- EliminarRegistroException
+Tratamientos <|.. Medico
+Usuario <|-- Medico
+Usuario <|-- Paciente
+Accion <|-- AccionBooleana
+Accion <|-- AccionDouble
+Tratamientos <|.. Admin
+Usuario <|-- Admin
+Exception <|-- AccionFallidaException
+Exception <|-- CredencialesIncorrectasException
+Exception <|-- DniIncorrectoException
+JsonSerializer <|.. AbstractAccionAdapter
+JsonDeserializer <|.. AbstractAccionAdapter
+Exception <|-- DniInexistenteException
+Exception <|-- MailRepetidoException
+@enduml
